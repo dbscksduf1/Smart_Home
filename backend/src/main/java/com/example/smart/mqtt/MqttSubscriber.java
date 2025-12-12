@@ -3,11 +3,13 @@ package com.example.smart.mqtt;
 import com.example.smart.service.SensorService;
 import lombok.RequiredArgsConstructor;
 import org.eclipse.paho.client.mqttv3.*;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
 
 @Service
+@Profile("local")   // 🔥 이 줄 추가 → local 환경에서만 MQTT 실행됨
 @RequiredArgsConstructor
 public class MqttSubscriber {
 
