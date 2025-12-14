@@ -5,82 +5,53 @@ import com.example.smart.dto.SensorRequest;
 import com.example.smart.repository.SensorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
+/**
+ 센서 데이터를 저장하고 조회하는 역할을 담당하는 서비스이다.
+ 센서 데이터를 하나의 로직으로 처리하도록 구성되어 있다.
+ **/
 @Service
 @RequiredArgsConstructor
 public class SensorService {
 
+    // 센서 데이터를 DB에 저장하고 조회하기 위한 저장소
     private final SensorRepository repo;
 
 
-
-    // 🔥 센서 저장 로직 (MQTT / HTTP 업로드 공통)
+    // 센서 데이터를 저장
     public void saveSensor(SensorRequest dto) {
 
+        // 전달받은 센서 값을 엔티티로 변환해 저장
         SensorData data = SensorData.builder()
                 .temperature(dto.getTemperature())
                 .humidity(dto.getHumidity())
                 .light(dto.getLight())
                 .gas(dto.getGas())
                 .noise(dto.getNoise())
-                .air(dto.getAir())            // ✅ 공기질 저장 추가됨
+                .air(dto.getAir())
                 .time(dto.getTime())
                 .build();
 
         repo.save(data);
-
-        // ------------------------------------------------
-        // 🔥 환경 자동 제어 로직
-        // ------------------------------------------------
-
-        double thi = 0.81 * dto.getTemperature()
-                + 0.01 * dto.getHumidity() * (0.99 * dto.getTemperature() - 14.3)
-                + 46.3;
-
-        String thiLevel;
-        if (thi < 68) thiLevel = "good";
-        else if (thi < 75) thiLevel = "normal";
-        else thiLevel = "bad";
-
-        String gasLevel;
-        if (dto.getGas() < 100) gasLevel = "good";
-        else if (dto.getGas() < 150) gasLevel = "normal";
-        else gasLevel = "bad";
-
-        String noiseLevel;
-        if (dto.getNoise() < 30) noiseLevel = "good";
-        else if (dto.getNoise() < 60) noiseLevel = "normal";
-        else noiseLevel = "bad";
-
-
-
-        // 원인
-        String reason = "good";
-        if (gasLevel.equals("bad")) reason = "airquality";
-        else if (thiLevel.equals("bad")) reason = "discomfort";
-        else if (noiseLevel.equals("bad")) reason = "noise";
-        else if (gasLevel.equals("normal")) reason = "airquality";
-        else if (thiLevel.equals("normal")) reason = "discomfort";
-        else if (noiseLevel.equals("normal")) reason = "noise";
-
-
-
-
     }
 
-    // 🔥 최신 데이터 1개
+
+    // 가장 최근에 저장된 센서데이터 1건을 반환
+    //(대시보드나 실시간 화면에서 현재 상태를 표시할때 사용)
     public SensorData latest() {
         return repo.findTopByOrderByIdDesc();
     }
 
-    // 🔥 그래프용 전체 데이터 조회
+
+    // 저장된 전체 센서 데이터 조회
+    //(그래프 화면에서 시간에 따른 변화를 확인할 때 사용)
     public List<SensorData> findAll() {
         return repo.findAll();
     }
 
-    // 🔥 MQTT 저장용 (원하면 공기질 토픽도 추가 가능)
+
+    // 수신된 센서 데이터 저장
     public void saveFromMqtt(String topic, String value) {
         SensorRequest req = new SensorRequest();
 
@@ -100,13 +71,19 @@ public class SensorService {
             case "home/sensor/noise":
                 req.setNoise(Integer.parseInt(value));
                 break;
-            // case "home/sensor/air": req.setAir(Integer.parseInt(value)); break;   // ← 필요 시 추가
+            case "home/sensor/air":
+                req.setAir(Integer.parseInt(value));
+                break;
+
             default:
-                System.out.println("⚠ 알 수 없는 센서 타입: " + topic);
+                System.out.println("알 수 없는 센서 타입: " + topic);
                 return;
         }
 
+        // 수신한 시간을 저장
         req.setTime(String.valueOf(System.currentTimeMillis()));
+
+        // 변환된 센서 데이터를 공통 저장 로직으로 전달
         saveSensor(req);
     }
 }

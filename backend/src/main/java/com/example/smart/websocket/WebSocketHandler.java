@@ -1,5 +1,11 @@
 package com.example.smart.websocket;
 
+/**
+ 센서 데이터 값이나 분석결과가 바뀌면 페이지를 새로고침 하지 않아도 바로 화면에 반영되도록
+ 서버에서 클라이언트로 데이터를 전달하는 역할을 한다.
+ **/
+
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
