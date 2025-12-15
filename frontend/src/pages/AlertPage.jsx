@@ -5,7 +5,7 @@ export default function AlertPage() {
   const [sensor, setSensor] = useState(null);
   const [alertMsg, setAlertMsg] = useState("");
 
-  // 위험도 판단
+  
   const getAlertMessage = (s) => {
     if (!s) return "";
 
@@ -16,7 +16,7 @@ export default function AlertPage() {
     const a = s.air.toFixed(1);
     const n = s.noise.toFixed(1);
 
-    // 위험 점수 산정
+   
     const levels = {
       temp: s.temperature > 30 ? 3 : s.temperature > 27 ? 2 : 0,
       hum: s.humidity > 70 || s.humidity < 30 ? 2 : 0,
@@ -26,14 +26,14 @@ export default function AlertPage() {
       noise: s.noise > 70 ? 2 : s.noise > 55 ? 1 : 0,
     };
 
-    // 최고 위험도
+   
     const maxLevel = Math.max(...Object.values(levels));
 
     if (maxLevel === 0) {
       return "현재 실내 환경이 매우 쾌적합니다. 이 상태를 유지해주세요!";
     }
 
-    // 위험 메시지
+  
     if (levels.temp === maxLevel)
       return `온도가 ${t}°C로 높습니다. 온도를 낮춰주세요.`;
 

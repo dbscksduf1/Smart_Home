@@ -39,7 +39,7 @@ export default function GraphPage() {
       const d = res.data;
       setData(d);
 
-      // 최대/최소 업데이트
+      
       setRange((prev) => {
         const updateOne = (old, val) => ({
           max: old.max === null ? val : Math.max(old.max, val),
@@ -56,7 +56,7 @@ export default function GraphPage() {
         };
       });
 
-      // history + diff 업데이트
+      
       setHistory((prev) => {
         const updateOne = (arr, value) =>
           arr.length >= 10 ? [...arr.slice(1), value] : [...arr, value];

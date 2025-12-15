@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import api from "../api";
 
+
+
+// 센서 데이터를 기반으로 AI 분석 결과를 보여주는 페이지
+
+
 export default function AnalysisPage() {
   const [sensor, setSensor] = useState(null);
   const [ai, setAi] = useState("");
   const [statusText, setStatusText] = useState("");
 
-  // 상태 판단 로직
+  
   const evaluateStatus = (s) => {
     if (!s) return "";
 
@@ -31,15 +36,15 @@ export default function AnalysisPage() {
 
   const loadData = async () => {
     try {
-      // 🔥 최신 센서값 가져오기
+      
       const res = await api.get("/sensor/latest");
       const s = res.data;
       setSensor(s);
 
-      // 🔥 상태 텍스트 생성
+      
       setStatusText(evaluateStatus(s));
 
-      // 🔥 실제 AI 어시스턴스 호출
+      
       const aiRes = await api.get("/ai/environment");
       setAi(aiRes.data);
 

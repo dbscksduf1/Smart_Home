@@ -8,7 +8,7 @@ export default function Sparkline({ data }) {
   return (
     <div className="sparkline">
       {data.map((v, i) => {
-        const height = max === 0 ? 2 : (v / max) * 30; // 막대 최대 높이 30px
+        const height = max === 0 ? 2 : (v / max) * 30; 
         return (
           <div
             key={i}

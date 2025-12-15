@@ -1,7 +1,7 @@
-/* 🔥 전체 배경 이미지 설정 */
+/* 전체 배경 이미지 설정 */
 body {
   background: url('/smarthome.jpeg') no-repeat center center fixed;
-  background-size: contain; /* 사진 크기 줄이려고 contain 유지 */
+  background-size: contain; 
   color: #333;
   margin: 0;
   padding: 0;
@@ -9,10 +9,10 @@ body {
   font-family: "Pretendard", sans-serif;
 }
 
-/* 상단 네비게이션 바 */
+
 .navbar {
   width: 100%;
-  background: #ffffffcc; /* 반투명 */
+  background: #ffffffcc; 
   backdrop-filter: blur(6px);
   padding: 18px 0;
   display: flex;
@@ -35,7 +35,7 @@ body {
   color: #0077ff;
 }
 
-/* 페이지 전체 중앙 정렬 */
+
 .page-container {
   width: 100%;
   min-height: calc(100vh - 80px);
@@ -46,7 +46,7 @@ body {
   padding-top: 50px;
 }
 
-/* Connect 버튼 */
+
 .connect-btn {
   background: #0077ff;
   color: white;
@@ -58,7 +58,7 @@ body {
   transition: 0.2s;
 }
 
-/* Connect 버튼 위치 조금 위로 */
+
 .connect-position {
   margin-top: -40px;
 }
@@ -67,7 +67,7 @@ body {
   background: #005fcc;
 }
 
-/* 안내 문구 */
+
 .connect-desc {
   margin-top: 12px;
   font-size: 14px;
@@ -76,7 +76,7 @@ body {
   text-shadow: 0 1px 2px rgba(255,255,255,0.6);
 }
 
-/* 큰 카드 전체 */
+
 .big-card {
   width: 450px;
   background: rgba(255, 255, 255, 0.92);
@@ -87,7 +87,7 @@ body {
   backdrop-filter: blur(4px);
 }
 
-/* 페이지 제목 */
+
 .page-title {
   font-size: 32px;
   font-weight: 700;
@@ -96,7 +96,7 @@ body {
   text-shadow: 0 2px 6px rgba(0,0,0,0.25);
 }
 
-/* 센서 데이터 블록 */
+
 .big-card .row {
   margin-bottom: 20px;
 }
@@ -112,7 +112,7 @@ body {
   color: #666;
 }
 
-/* 업데이트 시간 표시 */
+
 .update-time {
   margin-top: 15px;
   font-size: 14px;
@@ -122,7 +122,7 @@ body {
   font-size: 32px;
   font-weight: 700;
   margin-bottom: 25px;
-  color: #111; /* 더 진하게 */
+  color: #111; 
   text-shadow: 0px 2px 6px rgba(255, 255, 255, 0.9),
-               0px 2px 8px rgba(0, 0, 0, 0.4); /* 밝은 배경/어두운 배경 둘 다 잘 보이게 */
+               0px 2px 8px rgba(0, 0, 0, 0.4); 
 }
