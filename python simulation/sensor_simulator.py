@@ -1,3 +1,10 @@
+"""" 초기 개발 단계에서 센서 동작을 테스트하기 위해 사용한 파이썬 시뮬레이터.
+
+현재 배포 버전에서는 사용할수 없어서 Spring Boot 내부 시뮬레이터를 사용하며,
+본 파일은 로컬 테스트 및 개발 과정 기록용으로 보관"""
+
+
+
 import requests
 import time
 import random
@@ -22,4 +29,4 @@ while True:
     except Exception as e:
         print("에러:", e)
 
-    time.sleep(60)
+    time.sleep(60) 
