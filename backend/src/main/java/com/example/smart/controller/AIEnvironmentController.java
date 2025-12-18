@@ -3,7 +3,7 @@ package com.example.smart.controller;
 import com.example.smart.domain.SensorData;
 import com.example.smart.service.SensorAnalysisService;
 import com.example.smart.service.OpenAIService;
-import com.example.smart.simulator.SensorSimulator;
+import com.example.smart.service.SensorSimulator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

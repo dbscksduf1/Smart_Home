@@ -2,7 +2,7 @@ package com.example.smart.controller;
 
 import com.example.smart.dto.SensorResponse;
 import com.example.smart.domain.SensorData;
-import com.example.smart.simulator.SensorSimulator;
+import com.example.smart.service.SensorSimulator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class SensorController {
 
     //시뮬레이터에 저장된 최신 센서 값을 사용
-    private final SensorSimulator simulator;
+    private final SensorSimulator service;
 
     /**
      가장 최근에 수집된 센서 데이터를 반환한다.
@@ -30,7 +30,7 @@ public class SensorController {
     public ResponseEntity<?> latest() {
 
         // 시뮬레이터에 저장된 최신 센서 데이터를 가져옴
-        SensorData data = simulator.getLatestData();
+        SensorData data = service.getLatestData();
 
         // 아직 센서 데이터가 한 번도 생성되지 않은 경우를 대비한 예외처리
         if (data == null) {

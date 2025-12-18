@@ -1,4 +1,4 @@
-package com.example.smart.simulator;
+package com.example.smart.service;
 
 import com.example.smart.domain.SensorData;
 import lombok.Getter;
