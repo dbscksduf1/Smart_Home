@@ -14,22 +14,26 @@ public class MqttSubscriber {
     private final MqttConnectOptions options;
     private final SensorService sensorService;
 
-    @Value("${mqtt.broker}")
+    @Value("${mqtt.broker:}")
     private String broker;
 
-    @Value("${mqtt.topic}")
+    @Value("${mqtt.topic:}")
     private String topic;
 
-    @Value("${mqtt.client-id}")
+    @Value("${mqtt.client-id:}")
     private String clientId;
 
     @PostConstruct
     public void init() throws MqttException {
 
+        if (broker.isEmpty() || topic.isEmpty() || clientId.isEmpty()) {
+            System.out.println("MQTT config missing. Skip MQTT subscriber init.");
+            return;
+        }
+
         System.out.println("Connecting to MQTT broker: " + broker);
 
         MqttClient client = new MqttClient(broker, clientId);
-
         client.connect(options);
 
         System.out.println("Connected to MQTT broker");
@@ -37,7 +41,6 @@ public class MqttSubscriber {
         client.subscribe(topic, (t, message) -> {
             String payload = new String(message.getPayload());
             System.out.println("MQTT 수신 → " + t + " | " + payload);
-
             sensorService.saveFromMqtt(t, payload);
         });
 
