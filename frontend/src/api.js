@@ -5,7 +5,7 @@ import axios from "axios";
 **/
 
 const api = axios.create({
-  baseURL: "https://smart-home-up3k.onrender.com",
+  baseURL: "https://smart-home-1-lyt6.onrender.com",
 });
 
 export default api;
