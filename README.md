@@ -19,11 +19,10 @@
 
 # 프로젝트 소개 <a name="intro"></a>
 
-Smart Home System은 실내 환경 데이터를 기반으로  
-현재 공간 상태를 시각적으로 확인하고,  
+Smart Home System은 실내 환경 데이터를 기반으로 현재 공간 상태를 시각적으로 확인하고, 
 AI 분석을 통해 사용자에게 관리 조언을 제공하는 서비스입니다.  
 
-실제 센서가 없는 환경에서도 동작할 수 있도록  
+실제 센서가 없는 환경에서 동작하는
 **시뮬레이터 기반 구조**로 설계했습니다.
 
 ---
@@ -31,9 +30,8 @@ AI 분석을 통해 사용자에게 관리 조언을 제공하는 서비스입�
 # 기술 스택 <a name="stack"></a>
 
 - Backend: Spring Boot, Spring Data JPA, OpenAI API
-- Frontend: React, Axios
+- Frontend: React
 - Database: H2 / MySQL
-- Infra: Render
 
 ---
 
@@ -42,8 +40,8 @@ AI 분석을 통해 사용자에게 관리 조언을 제공하는 서비스입�
 - 센서 데이터(온도, 습도, 조도, 가스, 소음, 공기질) 수집 및 제공
 - 대시보드 기반 실시간 환경 상태 시각화
 - AI 기반 환경 분석 및 사용자 맞춤 조언
-- 센서 데이터 변화 그래프 제공
-- 위험 수치 발생 시 알림 기능
+- 센서 데이터 변화 그래프 제공 및 최대/최소값 출력
+- 위험 수치 발생 시 관리자 알림 기능
 
 ---
 
@@ -124,16 +122,24 @@ Spring Scheduler를 활용하여 주기적으로 센서 데이터 생성
 # 서비스 화면 <a name="ui"></a>
 
 ## 📊 대시보드
-<img src="" />
+<p align="center">
+  <img src="캡처1.PNG" width="700"/>
+</p>
 
 ## 📈 그래프
-<img src="" />
+<p align="center">
+  <img src="캡처.PNG" width="700"/>
+</p>
 
 ## 🤖 AI 분석
-<img src="" />
+<p align="center">
+  <img src="캡처2.PNG" width="700"/>
+</p>
 
 ## ⚠️ 알림
-<img src="" />
+<p align="center">
+  <img src="캡처3.PNG" width="700"/>
+</p>
 
 ---
 
